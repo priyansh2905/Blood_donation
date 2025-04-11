@@ -1,13 +1,14 @@
+
 import {Link} from "react-scroll";
 const Navbar = () => {
   return (
     <div className="flex items-center justify-between h-[100px] px-[200px]">
 
         <img
-        src="/logo_bloodbridge.jpg"
+        src="/logo_bloodbridge_1.jpg"
         alt="BloodBridge Logo"
-        height={200}
-        width={200}
+        height={150}
+        width={150}
         className="cursor-pointer"
         />
         <div className="flex items-center justify-evenly cursor-pointer">
