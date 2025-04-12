@@ -7,11 +7,12 @@ const {
   deleteDonor,
   getDonorsStats,
 } = require("../controllers/donor.js");
+const { verifyToken, verifyTokenAndAuthorization } = require("../middlewares/verifyToken.js");
 
 const router = express.Router();
 
 //add donor
-router.post("/", createDonor);
+router.post("/",verifyTokenAndAuthorization, createDonor);
 
 //get all donors
 router.get("/", getAlldonors);
