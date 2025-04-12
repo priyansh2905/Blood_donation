@@ -10,7 +10,7 @@ function App() {
     return (
       <div className="flex">
         <div>
-          <Menu/>
+          <h1>Menu</h1>
         </div>
         <div>
           <Outlet />
@@ -52,8 +52,8 @@ function App() {
     <>
       <RouterProvider router={router} />
     </>
-
-  )
+  );
+  
 }
 
 export default App
