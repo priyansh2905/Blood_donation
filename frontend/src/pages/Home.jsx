@@ -13,9 +13,9 @@ const Home = () => {
 
       <Element name="featured"><Featured /></Element>
 
-      <Element name="contact"><Contact /></Element>
+      <Contact />
 
-      <Footer />
+      <Element name="contact"><Footer /></Element>
 
 
     </div>
