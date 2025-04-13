@@ -4,6 +4,8 @@ const app = express();
 const dotenv = require("dotenv");
 const cron = require("node-cron");
 const dbConnection = require("./utils/db");
+const { sendDetailsProspectEmail } = require("./EmailServices/sendDetailsProspect");
+const { sendEligibilityEmail } = require("./EmailServices/sendEligibilityEmail");
 dotenv.config();
 
 //Server
@@ -16,5 +18,8 @@ app.listen(PORT, () => {
 //SCHEDULE TASK
 
 const run = () => {
-  cron.schedule("* * * * * *", () => {});
+  cron.schedule("* * * * * *", () => {
+    sendDetailsProspectEmail();
+    sendEligibilityEmail();
+  });
 };
