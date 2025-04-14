@@ -5,10 +5,10 @@ import { FaUser } from "react-icons/fa";
 const Admin = () => {
 	const dataset = [{ x: 1, y: 32 }, { x: 2, y: 41 }, { x: 3, y: 10 }];
 	const donorList = ["a", "b", "c", "d"];
-	const rightPieData = [{ value: "10", color: "red", label: "A" },
-	{ value: "20", color: "blue", label: "B" },
-	{ value: "40", color: "yellow", label: "C" },
-	{ value: "30", color: "green", label: "D" },
+	const rightPieData = [{ value: 10, color: "red", label: "A" },
+	{ value: 20, color: "blue", label: "B" },
+	{ value: 40, color: "yellow", label: "C" },
+	{ value: 30, color: "green", label: "D" },
 	]
 	return (
 		<div className="flex justify-between h[100vh]">
