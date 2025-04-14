@@ -5,6 +5,9 @@ import Admin from "./pages/Admin";
 import Donors from "./pages/Donors";
 import Prospects from "./pages/Prospects";
 import Menu from "./components/Menu";
+import Prospect from "./pages/Prospect";
+import NewDonor from "./pages/NewDonor";
+import Donor from "./pages/Donor";
 function App() {
 	const Layout = () => {
 		return (
@@ -43,7 +46,19 @@ function App() {
 				{
 					path: "/admin/prospects",
 					element: <Prospects />,
-				}
+				},
+				{
+					path: "/admin/prospect/:id",
+					element: <Prospect />,
+				},
+				{
+					path: "/admin/newdonor",
+					element: <NewDonor />,
+				},
+				{
+					path: "/admin/donor/:id",
+					element: <Donor />,
+				},
 			]
 		}
 	])

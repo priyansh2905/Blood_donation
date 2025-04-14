@@ -38,7 +38,9 @@ const Donors = () => {
 		<div className="w-[70vw]">
 			<div className="flex items-center justify-between m-[30px]">
 				<h1 className="p-[20px] text-[20px] font-semibold">All Donors</h1>
-				<button className="bg-[#1e1e1e] text-white p-[10px] cursor-pointer font-semibold"> New Donor</button>
+				<Link to="/admin/newdonor">
+					<button className="bg-[#1e1e1e] text-white p-[10px] cursor-pointer font-semibold"> New Donor</button>
+				</Link>
 			</div>
 			<div className="m-[30px]">
 				<DataGrid rows={rows} checkboxSelection columns={columns} />
