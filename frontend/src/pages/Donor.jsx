@@ -1,6 +1,22 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { publicRequest } from '../requestMethods';
 const Donor = () => {
+	const [donor, setDonor] = useState({});
+	const location = useLocation();
+	const donorId = location.pathname.split("/")[3];
+
+	useEffect(() => {
+		const getDonor = async() => {
+			try {
+				const res = await publicRequest.get(`/donors/find/${donorId}`);
+				setDonor(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		getDonor();
+	},[])
 	return (
 		<div className="flex items-center justify-center min-h-screen">
 			<div className="m-[20px] p-[20px] h-[80vh] w-[450px]">
@@ -9,19 +25,19 @@ const Donor = () => {
 					<label htmlFor="">Name</label>
 					<input
 						type="text"
-						placeholder="Your Name"
+						placeholder={donor.name}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 					<label htmlFor="">Address</label>
 					<input
 						type="text"
-						placeholder="Your Address"
+						placeholder={donor.address}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 					<label htmlFor="">Phone Number</label>
 					<input
 						type="text"
-						placeholder="XXX XXX XXXX"
+						placeholder={donor.tel}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 					<label htmlFor="">Blood Group</label>
@@ -40,7 +56,7 @@ const Donor = () => {
 					<label htmlFor="">E-Mail Address</label>
 					<input
 						type="email"
-						placeholder="Your email Address"
+						placeholder={donor.email}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 
@@ -51,21 +67,21 @@ const Donor = () => {
 					<label htmlFor="">Weight</label>
 					<input
 						type="number"
-						placeholder="Your Weight(in kgs)"
+						placeholder={`${donor.weight} kg`}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 					
 
 					<label htmlFor="">Date of Birth</label>
 					<input
 						type="date"
-						placeholder="Your Date of Birth(dd/mm/yyyy)"
+						placeholder={donor.date}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 
 					<label htmlFor="">Any Diseases</label>
 					<textarea
 						type="number"
-						placeholder="N/A"
+						placeholder={donor.diseases}
 						className="border-b-2 border-b-[#555] border-solid outline-none p-[10px] w-[300px]" />
 
 					<button className="bg-[#444] cursor-pointer text-white p-[10px] w-[300px] my-[10px]">Update</button>

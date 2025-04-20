@@ -11,7 +11,7 @@ const Admin = () => {
 	{ value: 30, color: "green", label: "D" },
 	]
 	return (
-		<div className="flex justify-between h[100vh]">
+		<div className="flex justify-between h-[100vh]">
 			<div className="flex flex-col">
 				<div className="flex flex-wrap">
 					<div className="bg-gray-50 m-[30px] w-[350px] shadow-xl h-[300px]">
@@ -69,21 +69,23 @@ const Admin = () => {
 							})
 						}
 					</ul>
-					<PieChart
-						series={[
-							{
-								data: rightPieData,
-								innerRadius: 70,
-								outerRadius: 100,
-								paddingAngle: 5,
-								cornerRadius: 5,
-								startAngle: 225,
-								endAngle: 495,
-								cx: 150,
-								cy: 150,
-							}
-						]}
-					/>
+					<div className="h-[300px] w-[300px]">
+						<PieChart
+							series={[
+								{
+									data: rightPieData,
+									innerRadius: 70,
+									outerRadius: 100,
+									paddingAngle: 5,
+									cornerRadius: 5,
+									startAngle: 225,
+									endAngle: 495,
+									cx: 150,
+									cy: 100,
+								},
+							]}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,16 +1,21 @@
 import { DataGrid } from '@mui/x-data-grid';
+import { use, useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { publicRequest } from '../requestMethods.js';
+
+
 const Donors = () => {
+	const [donors, setDonors] = useState([]);
 	const columns = [
-		{ field: "id", headerName: "ID", width: 90 },
+		{ field: "_id", headerName: "ID", width: 90 },
 		{ field: "name", headerName: "Name", width: 90 },
 		{ field: "address", headerName: "Address", width: 90 },
-		{ field: "bloodType", headerName: "Blood Type", width: 90 },
-		{ field: "disease", headerName: "Diseases", width: 90 },
+		{ field: "bloodgroup", headerName: "Blood Type", width: 90 },
+		{ field: "diseases", headerName: "Diseases", width: 90 },
 		{
 			field: "edit", headerName: "Edit", width: 90,
-			renderCell: () => {
+			renderCell: (params) => {
 				return (
 					<>
 						<Link to={`/admin/donor/123`}>
@@ -24,16 +29,37 @@ const Donors = () => {
 		},
 		{
 			field: "delete", headerName: "Delete", width: 90,
-			renderCell: () => {
+			renderCell: (params) => {
 				return (
 					<>
-						<FaTrash className='text-red-500 cursor-pointer m-2' />
+						<FaTrash className='text-red-500 cursor-pointer m-2' 
+						onClick={() => handleDelete(params.row._id)} />
 					</>
 				)
 			}
 		},
 	]
 	const rows = [{ id: "abc", name: "xyz", address: "pqrs", bloodType: "A+", disease: "mno", }];
+	const handleDelete = async(id) => {
+		try {
+			await publicRequest.delete(`/donors/${id}`);
+			window.location.reload();
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	useEffect(() => {
+		const getDonors = async() => {
+			try {
+				const res = await publicRequest.get("/donors");
+				setDonors(res.data);
+			}
+			catch (error) {
+				console.log(error);
+			}
+		}
+		getDonors();
+	}, [])
 	return (
 		<div className="w-[70vw]">
 			<div className="flex items-center justify-between m-[30px]">
@@ -43,7 +69,8 @@ const Donors = () => {
 				</Link>
 			</div>
 			<div className="m-[30px]">
-				<DataGrid rows={rows} checkboxSelection columns={columns} />
+				<DataGrid rows={donors} 
+			 getRowId={(row) => row._id}	checkboxSelection columns={columns} />
 			</div>
 		</div>
 	)
