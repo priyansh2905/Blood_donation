@@ -16,9 +16,6 @@ const NewDonor = () => {
 	}
 	const handleDonors = async ()=>{
 		try {
-			console.log(inputs)
-
-			
 				await publicRequest.post("/donors", inputs);
 				toast.success("Donor has been successfully added to the database")
 				setInputs({})

@@ -1,8 +1,36 @@
+import React, { useState, useEffect } from "react";
+
+
 import { Gauge } from "@mui/x-charts/Gauge"
 import { LineChart } from "@mui/x-charts/LineChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { FaUser } from "react-icons/fa";
 const Admin = () => {
+	const [bloodGroupData,setBloodGroupData]=useState([]);
+	useEffect(()=>{
+
+		const getBloodGroupStats=async()=>{
+			try {
+
+				const res = await publicRequest.get("/donors/stats");
+				console.log(res.data);
+				const transformedData = res.data.map((item,index)=>({
+					id:index,
+					value: item.count,
+					label: `Blood Group ${item._id}`
+				}))
+				setBloodGroupData(transformedData);
+			} catch (error) {
+				console.log(error)
+			}
+			
+		}
+
+		getBloodGroupStats()
+
+	},[])
+
+	console.log(bloodGroupData)
 	const dataset = [{ x: 1, y: 32 }, { x: 2, y: 41 }, { x: 3, y: 10 }];
 	const donorList = ["a", "b", "c", "d"];
 	const rightPieData = [{ value: 10, color: "red", label: "A" },
@@ -73,13 +101,14 @@ const Admin = () => {
 						<PieChart
 							series={[
 								{
-									data: rightPieData,
-									innerRadius: 70,
-									outerRadius: 100,
+									data:bloodGroupData,
+									//data: rightPieData,
+									innerRadius: 50,
+									outerRadius: 70,
 									paddingAngle: 5,
 									cornerRadius: 5,
-									startAngle: 225,
-									endAngle: 495,
+									startAngle: -90,
+									endAngle: 180,
 									cx: 150,
 									cy: 100,
 								},
