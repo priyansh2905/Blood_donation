@@ -41,7 +41,7 @@ const Prospect = () => {
 						<strong>Diseases:</strong> {prospect.diseases}
 					</li>
 					<li className='mt-[14px]'>
-						<strong>Weight: </strong>{prospect.date}
+						<strong>Weight: </strong>{prospect.weight}
 					</li>
 				</ul>
 				<span className='block m-[10px]'>
