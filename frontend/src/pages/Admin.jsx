@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-
-
 import { Gauge } from "@mui/x-charts/Gauge"
 import { LineChart } from "@mui/x-charts/LineChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { FaUser } from "react-icons/fa";
+import { logout } from "../redux/userRedux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 const Admin = () => {
 	const [bloodGroupData,setBloodGroupData]=useState([]);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	useEffect(()=>{
 
 		const getBloodGroupStats=async()=>{
@@ -30,7 +35,7 @@ const Admin = () => {
 
 	},[])
 
-	console.log(bloodGroupData)
+	// console.log(bloodGroupData)
 	const dataset = [{ x: 1, y: 32 }, { x: 2, y: 41 }, { x: 3, y: 10 }];
 	const donorList = ["a", "b", "c", "d"];
 	const rightPieData = [{ value: 10, color: "red", label: "A" },
@@ -38,6 +43,16 @@ const Admin = () => {
 	{ value: 40, color: "yellow", label: "C" },
 	{ value: 30, color: "green", label: "D" },
 	]
+
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate("/login");
+		// localStorage.removeItem("persist:root");
+		// localStorage.removeItem("user");
+		// localStorage.removeItem("persist:donor");
+		// localStorage.removeItem("donor");
+		// window.location.reload();
+	}
 	return (
 		<div className="flex justify-between h-[100vh]">
 			<div className="flex flex-col">
@@ -86,7 +101,7 @@ const Admin = () => {
 			<div className="flex flex-col bg-gray-100 m-[20px] h-[700px] w-full shadow-xl overflow-auto">
 				<div className="flex items-center m-[20px] cursor-pointer">
 					<FaUser />
-					<span className="ml-[10px] font-semibold">Logout</span>
+					<span className="ml-[10px] font-semibold" onClick={handleLogout}>Logout</span>
 				</div>
 				<div className="flex flex-col items-center mt-[10px] overflow-auto">
 					<h2 className="font-bold">Recent Donors</h2>

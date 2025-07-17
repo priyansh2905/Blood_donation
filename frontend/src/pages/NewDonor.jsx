@@ -2,12 +2,13 @@ import { useState } from "react";
 import { publicRequest } from "../requestMethods"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useSelector } from "react-redux";
 
 const NewDonor = () => {
 
 	const [inputs, setInputs] = useState({});
-
+	const user = useSelector((state) => state.user);
+	console.log(user.currentUser);
 	const handleChange = (e) => {
 		setInputs((prev) => {
 			return { ...prev, [e.target.name]: e.target.value }
@@ -16,7 +17,9 @@ const NewDonor = () => {
 	}
 	const handleDonors = async ()=>{
 		try {
-				await publicRequest.post("/donors", inputs);
+				await publicRequest.post("/donors", inputs, {
+					headers : {token : `Bearer ${user.currentUser.accessToken}`}
+				});
 				toast.success("Donor has been successfully added to the database")
 				setInputs({})
 			
